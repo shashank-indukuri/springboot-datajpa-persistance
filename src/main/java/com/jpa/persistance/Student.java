@@ -6,11 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 
 @Data
-@Entity(name = "students")
+@Entity(name = "Student")
+@Table(
+    name = "students",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "student_email_unique", columnNames = "email")
+    }
+)
 public class Student {
     @Id
     @GeneratedValue
@@ -39,8 +47,7 @@ public class Student {
 
     @Column(
         name = "email",
-        nullable = false,
-        unique = true
+        nullable = false
     )
     private String email;
 
